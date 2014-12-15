@@ -1,6 +1,8 @@
 # ignore our bin/out dirs
 bin/
 out/
+out.svg
+
 
 # emacs ignore
 *~
