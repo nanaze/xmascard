@@ -77,11 +77,28 @@ def main():
     bullet_svg = _LoadSvg(path)
     g.appendChild(bullet_svg)
 
-  # Just for now, paint out all the bullets.
-  y = 0
-  for letter in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'J', 'L', 'M', 'N', 'Q', 'R', 'S', 'Z'] + range(1,8):
-    AppendBullet(letter, (0, y))
-    y += 50
+  AppendBullet('A', (400, 400))
+  AppendBullet('B', (500, 150))
+  AppendBullet('C', (500, 650))
+  AppendBullet('D', (400, 200))
+  AppendBullet('E', (200, 500))
+  AppendBullet('F', (300, 200))
+  AppendBullet('G', (400, 300))
+  AppendBullet('J', (400, 800))
+  AppendBullet('L', (300, 240))
+  AppendBullet('M', (350, 500))
+  AppendBullet('N', (400, 200))
+  AppendBullet('Q', (400, 200))
+  AppendBullet('R', (400, 200))
+  AppendBullet('S', (400, 200))
+  AppendBullet('Z', (400, 200))
+  AppendBullet('1', (400, 200))
+  AppendBullet('2', (400, 200))
+  AppendBullet('3', (400, 200))
+  AppendBullet('4', (400, 200))
+  AppendBullet('5', (400, 200))
+  AppendBullet('6', (400, 200))
+  AppendBullet('7', (400, 725))                
   
   xmlstr = doc.toprettyxml()
 
