@@ -12,16 +12,35 @@ def _LoadSvg(path):
   return doc_frag
 
 
-def _CreateTriangle():
+def _CreateTree():
   tree = minidom.Element('svg')
 
   tree.setAttribute('viewBox', '0 0 1 1')
-  
-  tri = minidom.Element('polygon')
-  tri.setAttribute('points', '0.5,0 0,1 1,1')
-  tri.setAttribute('style', 'fill:#3C8D0D')
-  tree.appendChild(tri)
 
+  def AddPolygon(points):
+    tri = minidom.Element('polygon')
+
+    point_strings = []
+    for point in points:
+      point_strings.append('%f, %f' % point)
+
+    points_string = ' '.join(point_strings)
+    tri.setAttribute('points', points_string)
+    tri.setAttribute('style', 'fill:#3C8D0D')
+    tree.appendChild(tri)
+
+  def AddTriangle(top, bottom, width):
+    points = [
+      (0.5, top),
+      (0.5 - (width / 2.0), bottom),
+      (0.5 + (width / 2.0), bottom)]
+    AddPolygon(points)
+
+  AddTriangle(0, 0.25, 0.3)
+  AddTriangle(0.1, 0.45, 0.45)
+  AddTriangle(0.2, 0.66, 0.6)
+  AddTriangle(0.3, 0.9, 0.78)
+  
   return tree
 
 def main():
@@ -34,16 +53,16 @@ def main():
   doc.appendChild(svg)
 
   # Build tree with triangles
-  tri = _CreateTriangle()
+  tree = _CreateTree()
 
   x_offset = 100
-  y_offset = 200
-  tri.setAttribute('width', str(800))
-  tri.setAttribute('height', str(800))
-  tri.setAttribute('x', str(x_offset))
-  tri.setAttribute('y', str(y_offset))
+  y_offset = 100
+  tree.setAttribute('width', str(800))
+  tree.setAttribute('height', str(800))
+  tree.setAttribute('x', str(x_offset))
+  tree.setAttribute('y', str(y_offset))
 
-  svg.appendChild(tri)
+  svg.appendChild(tree)
 
   # Append a bullet. translate should be a tuple.
   def AppendBullet(bullet_name, translate=None):
