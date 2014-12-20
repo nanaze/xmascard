@@ -23,7 +23,7 @@ def _CreateTree():
   def AddPolygon(points):
     tri = minidom.Element('polygon')
 
-    point_strings = []
+    point_strings = [] 
     for point in points:
       point_strings.append('%f, %f' % point)
 
@@ -94,27 +94,27 @@ def main():
     g.appendChild(bullet)
 
   AddOrnament('A', (0.5, 0.5))
-  AddOrnament('B', (0.25, 0.30))
+  AddOrnament('B', (0.45, 0.32))
   AddOrnament('C', (0.32, 0.33))
-  AddOrnament('D', (0.51, 0.39))
+  AddOrnament('D', (0.41, 0.63))
   AddOrnament('E', (0.67, 0.50))
   AddOrnament('F', (0.17, 0.80))
-  AddOrnament('G', (0.40, 0.74))
-  AddOrnament('J', (0.76, 0.57))
-  AddOrnament('L', (0.35, 0.64))
-  AddOrnament('M', (0.52, 0.72))
-  AddOrnament('N', (0.57, 0.36))
-  AddOrnament('Q', (0.61, 0.50))
+  AddOrnament('G', (0.34, 0.74))
+  AddOrnament('J', (0.66, 0.57))
+  AddOrnament('L', (0.30, 0.64))
+  AddOrnament('M', (0.65, 0.72))
+  AddOrnament('N', (0.55, 0.30))
+  AddOrnament('Q', (0.61, 0.70))
   AddOrnament('R', (0.32, 0.45))
-  AddOrnament('S', (0.34, 0.39))
-  AddOrnament('Z', (0.43, 0.07))
-  AddOrnament('1', (0.38, 0.18))
-  AddOrnament('2', (0.24, 0.58))
-  AddOrnament('3', (0.36, 0.31))
-  AddOrnament('4', (0.65, 0.70))
-  AddOrnament('5', (0.44, 0.68))
-  AddOrnament('6', (0.37, 0.25))
-  AddOrnament('7', (0.37, 0.06))
+  AddOrnament('S', (0.41, 0.22))
+  AddOrnament('Z', (0.50, 0.17))
+  AddOrnament('1', (0.43, 0.1))
+  AddOrnament('2', (0.26, 0.53))
+  AddOrnament('3', (0.66, 0.71))
+  AddOrnament('4', (0.55, 0.70))
+  AddOrnament('5', (0.44, 0.41))
+  AddOrnament('6', (1, 0.25))
+  AddOrnament('7', (0.40, 0.52))
   
   
   xmlstr = doc.toprettyxml()
