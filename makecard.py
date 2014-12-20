@@ -8,8 +8,11 @@ def _LoadSvg(path):
   doc = minidom.parse(path)
   doc_frag = minidom.DocumentFragment()
   for node in doc.childNodes:
-    doc_frag.appendChild(node)
-  return doc_frag
+    if node.nodeType == minidom.Node.ELEMENT_NODE:
+      if node.tagName == 'svg':
+        return node
+
+  raise Exception('no svg found')
 
 
 def _CreateTree():
@@ -64,41 +67,55 @@ def main():
 
   svg.appendChild(tree)
 
+  ornaments = doc.createElement('svg')
+  ornaments.setAttribute('width', '800')
+  ornaments.setAttribute('height', '800')
+  ornaments.setAttribute('x', str(x_offset))
+  ornaments.setAttribute('y', str(y_offset))
+  ornaments.setAttribute('viewBox', '0 0 1 1')  
+  
+  svg.appendChild(ornaments)
+  
   # Append a bullet. translate should be a tuple.
-  def AppendBullet(bullet_name, translate=None):
-
+  def AddOrnament(bullet_name, translate=None):
     g = doc.createElement('g')
-    svg.appendChild(g)
-
+    ornaments.appendChild(g)
+    
     if translate:
       g.setAttribute('transform', 'translate(%s, %s)' % translate)
 
     path = 'bullets/NYCS-bull-trans-%s.svg' % bullet_name
-    bullet_svg = _LoadSvg(path)
-    g.appendChild(bullet_svg)
+    bullet = _LoadSvg(path)
 
-  AppendBullet('A', (400, 400))
-  AppendBullet('B', (500, 150))
-  AppendBullet('C', (500, 650))
-  AppendBullet('D', (400, 200))
-  AppendBullet('E', (200, 500))
-  AppendBullet('F', (300, 200))
-  AppendBullet('G', (400, 300))
-  AppendBullet('J', (400, 800))
-  AppendBullet('L', (300, 240))
-  AppendBullet('M', (350, 500))
-  AppendBullet('N', (400, 200))
-  AppendBullet('Q', (400, 200))
-  AppendBullet('R', (400, 200))
-  AppendBullet('S', (400, 200))
-  AppendBullet('Z', (400, 200))
-  AppendBullet('1', (400, 200))
-  AppendBullet('2', (400, 200))
-  AppendBullet('3', (400, 200))
-  AppendBullet('4', (400, 200))
-  AppendBullet('5', (400, 200))
-  AppendBullet('6', (400, 200))
-  AppendBullet('7', (400, 725))                
+    bullet_size = 0.13
+    bullet.setAttribute('width', str(bullet_size))
+    bullet.setAttribute('height', str(bullet_size))
+    bullet.setAttribute('viewBox', '0 0 100 100')    
+    g.appendChild(bullet)
+
+  AddOrnament('A', (0.5, 0.5))
+  AddOrnament('B', (0.25, 0.30))
+  AddOrnament('C', (0.32, 0.33))
+  AddOrnament('D', (0.51, 0.39))
+  AddOrnament('E', (0.67, 0.50))
+  AddOrnament('F', (0.17, 0.80))
+  AddOrnament('G', (0.40, 0.74))
+  AddOrnament('J', (0.76, 0.57))
+  AddOrnament('L', (0.35, 0.64))
+  AddOrnament('M', (0.52, 0.72))
+  AddOrnament('N', (0.57, 0.36))
+  AddOrnament('Q', (0.61, 0.50))
+  AddOrnament('R', (0.32, 0.45))
+  AddOrnament('S', (0.34, 0.39))
+  AddOrnament('Z', (0.43, 0.07))
+  AddOrnament('1', (0.38, 0.18))
+  AddOrnament('2', (0.24, 0.58))
+  AddOrnament('3', (0.36, 0.31))
+  AddOrnament('4', (0.65, 0.70))
+  AddOrnament('5', (0.44, 0.68))
+  AddOrnament('6', (0.37, 0.25))
+  AddOrnament('7', (0.37, 0.06))
+  
   
   xmlstr = doc.toprettyxml()
 
