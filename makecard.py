@@ -20,29 +20,45 @@ def _CreateTree():
 
   tree.setAttribute('viewBox', '0 0 1 1')
 
-  def AddPolygon(points):
-    tri = minidom.Element('polygon')
+  def AddPolygon(points, style=None):
+    polygon = minidom.Element('polygon')
 
     point_strings = [] 
     for point in points:
       point_strings.append('%f, %f' % point)
 
     points_string = ' '.join(point_strings)
-    tri.setAttribute('points', points_string)
-    tri.setAttribute('style', 'fill:#006400')
-    tree.appendChild(tri)
+    polygon.setAttribute('points', points_string)
 
+    if style:
+      polygon.setAttribute('style', style)
+    tree.appendChild(polygon)
+
+  # Add the trunk
+  trunk_width = 0.13
+  half_trunk_width = trunk_width / 2.0
+  left = 0.5 - half_trunk_width
+  right = 0.5 + half_trunk_width
+  AddPolygon([
+    (left, 0.5),
+    (right, 0.5),
+    (right, 1),            
+    (left, 1)], 'fill:#855E42')
+
+  
   def AddTriangle(top, bottom, width):
     points = [
       (0.5, top),
       (0.5 - (width / 2.0), bottom),
       (0.5 + (width / 2.0), bottom)]
-    AddPolygon(points)
+    AddPolygon(points, 'fill:#006400')
 
   AddTriangle(0, 0.25, 0.3)
   AddTriangle(0.1, 0.45, 0.45)
   AddTriangle(0.2, 0.66, 0.6)
   AddTriangle(0.3, 0.9, 0.78)
+
+  
   
   return tree
 
