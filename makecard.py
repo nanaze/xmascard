@@ -29,7 +29,7 @@ def _CreateTree():
 
     points_string = ' '.join(point_strings)
     tri.setAttribute('points', points_string)
-    tri.setAttribute('style', 'fill:#3C8D0D')
+    tri.setAttribute('style', 'fill:#006400')
     tree.appendChild(tri)
 
   def AddTriangle(top, bottom, width):
