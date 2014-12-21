@@ -81,40 +81,32 @@ def _CreateStar():
 
 def _CreateSign(doc):
   sign = doc.createElement('svg')
-
-  rect = doc.createElement('rect')
-  rect.setAttribute('x', '0')
-  rect.setAttribute('y', '0')
-  rect.setAttribute('width', '800')
-  rect.setAttribute('height', '200')
-  sign.appendChild(rect)
-
+    
   line = doc.createElement('line')
   line.setAttribute('x1', '0')
-  line.setAttribute('y1', '20')
+  line.setAttribute('y1', '16')
   line.setAttribute('x2', '900')
-  line.setAttribute('y2', '20')
+  line.setAttribute('y2', '16')
   line.setAttribute('style', 'stroke:#fff; stroke-width:3')
   sign.appendChild(line)
-
   
   text = doc.createElement('text')
   text.appendChild(doc.createTextNode('Merry Christmas'))
   text.setAttribute('font-family', 'Helvetica')
-  text.setAttribute('font-size', '58')
+  text.setAttribute('font-size', '48')
   text.setAttribute('font-weight', '600')
   text.setAttribute('x', '24')
-  text.setAttribute('y', '90')
+  text.setAttribute('y', '78')
   text.setAttribute('style', 'fill:#FFF')
   sign.appendChild(text)
   
   text = doc.createElement('text')
   text.appendChild(doc.createTextNode('And a Happy New Year'))
   text.setAttribute('font-family', 'Helvetica')
-  text.setAttribute('font-size', '38')
+  text.setAttribute('font-size', '36')
   text.setAttribute('font-weight', '600')
   text.setAttribute('x', '24')
-  text.setAttribute('y', '154')
+  text.setAttribute('y', '134')
   text.setAttribute('style', 'fill:#FFF')
   
   sign.appendChild(text)
@@ -127,16 +119,25 @@ def main():
 
   svg = doc.createElement('svg')
   svg.setAttribute('xmlns', "http://www.w3.org/2000/svg")
+  svg.setAttribute('width', '800')
+  svg.setAttribute('height', '1120')
 
+  rect = doc.createElement('rect')
+  rect.setAttribute('width', '100%')
+  rect.setAttribute('height', '100%')
+  rect.setAttribute('style', 'fill:#00')
+  svg.appendChild(rect)
+  
   doc.appendChild(svg)
 
   # Build tree with triangles
   tree = _CreateTree()
-  
-  x_offset = 100
-  y_offset = 200
+
+  tree_top = 50
+  x_offset = 0
+  y_offset = tree_top + 125
   tree.setAttribute('width', str(800))
-  tree.setAttribute('height', str(800))
+  tree.setAttribute('height', str(700))
   tree.setAttribute('x', str(x_offset))
   tree.setAttribute('y', str(y_offset))
 
@@ -144,7 +145,7 @@ def main():
 
   ornaments = doc.createElement('svg')
   ornaments.setAttribute('width', '800')
-  ornaments.setAttribute('height', '800')
+  ornaments.setAttribute('height', '700')
   ornaments.setAttribute('x', str(x_offset))
   ornaments.setAttribute('y', str(y_offset))
   ornaments.setAttribute('viewBox', '0 0 1 1')  
@@ -183,7 +184,7 @@ def main():
     bullet.setAttribute('viewBox', '0 0 100 100')    
     g.appendChild(bullet)
 
-  AddOrnament('A', (0.5, 0.76))
+  AddOrnament('A', (0.58, 0.78))
   AddOrnament('B', (0.45, 0.32))
   AddOrnament('C', (0.32, 0.33))
   AddOrnament('D', (0.43, 0.66))
@@ -197,13 +198,13 @@ def main():
   AddOrnament('Q', (0.61, 0.54))
   AddOrnament('R', (0.35, 0.49))
   AddOrnament('S', (0.41, 0.22))
-  AddOrnament('Z', (0.50, 0.17))
+  AddOrnament('Z', (0.46, 0.79))
   AddOrnament('1', (0.43, 0.1))
   AddOrnament('2', (0.26, 0.53))
   AddOrnament('3', (0.70, 0.78))
   AddOrnament('4', (0.55, 0.67))
   AddOrnament('5', (0.44, 0.43))
-  AddOrnament('6', (1, 0.25))
+  AddOrnament('6', (0.50, 0.17))  
   AddOrnament('7', (0.33, 0.63))
   
   star_svg = doc.createElement('svg')
@@ -212,8 +213,8 @@ def main():
   star_svg.setAttribute('viewBox', '-1 -1 2 2')
   star_svg.setAttribute('width', '150')
   star_svg.setAttribute('height', '150')
-  star_svg.setAttribute('x', '425')
-  star_svg.setAttribute('y', '85')    
+  star_svg.setAttribute('x', '325')
+  star_svg.setAttribute('y', str(tree_top))
   svg.appendChild(star_svg)
 
   sign = _CreateSign(doc)
