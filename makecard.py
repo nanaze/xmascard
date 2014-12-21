@@ -103,34 +103,49 @@ def main():
     path = 'bullets/NYCS-bull-trans-%s.svg' % bullet_name
     bullet = _LoadSvg(path)
 
+    hanger = doc.createElement('polygon')
+
+    offset = 0.048
+    width = 0.012
+    half_width = width / 2.0
+    left, top = offset - half_width, 0.005 
+    right, bottom = offset + half_width, 0.05
+    hanger.setAttribute(
+      'points',
+      ('%f,%f %f,%f %f,%f %f,%f' %
+       (left, top, right, top, right, bottom, left, bottom)))
+    hanger.setAttribute('style', 'fill:#777')
+    g.appendChild(hanger)
+    
+
     bullet_size = 0.13
     bullet.setAttribute('width', str(bullet_size))
     bullet.setAttribute('height', str(bullet_size))
     bullet.setAttribute('viewBox', '0 0 100 100')    
     g.appendChild(bullet)
 
-  AddOrnament('A', (0.5, 0.5))
+  AddOrnament('A', (0.5, 0.76))
   AddOrnament('B', (0.45, 0.32))
   AddOrnament('C', (0.32, 0.33))
-  AddOrnament('D', (0.41, 0.63))
-  AddOrnament('E', (0.67, 0.50))
-  AddOrnament('F', (0.17, 0.80))
-  AddOrnament('G', (0.34, 0.74))
-  AddOrnament('J', (0.66, 0.57))
-  AddOrnament('L', (0.30, 0.64))
-  AddOrnament('M', (0.65, 0.72))
+  AddOrnament('D', (0.43, 0.66))
+  AddOrnament('E', (0.58, 0.44))
+  AddOrnament('F', (0.17, 0.78))
+  AddOrnament('G', (0.34, 0.76))
+  AddOrnament('J', (0.48, 0.54))
+  AddOrnament('L', (0.23, 0.69))
+  AddOrnament('M', (0.65, 0.70))
   AddOrnament('N', (0.55, 0.30))
-  AddOrnament('Q', (0.61, 0.70))
-  AddOrnament('R', (0.32, 0.45))
+  AddOrnament('Q', (0.61, 0.54))
+  AddOrnament('R', (0.35, 0.49))
   AddOrnament('S', (0.41, 0.22))
   AddOrnament('Z', (0.50, 0.17))
   AddOrnament('1', (0.43, 0.1))
   AddOrnament('2', (0.26, 0.53))
-  AddOrnament('3', (0.66, 0.71))
-  AddOrnament('4', (0.55, 0.70))
-  AddOrnament('5', (0.44, 0.41))
+  AddOrnament('3', (0.70, 0.78))
+  AddOrnament('4', (0.55, 0.67))
+  AddOrnament('5', (0.44, 0.43))
   AddOrnament('6', (1, 0.25))
-  AddOrnament('7', (0.40, 0.52))
+  AddOrnament('7', (0.33, 0.63))
   
   
   xmlstr = doc.toprettyxml()
