@@ -84,31 +84,34 @@ def _CreateSign(doc):
     
   line = doc.createElement('line')
   line.setAttribute('x1', '0')
-  line.setAttribute('y1', '16')
-  line.setAttribute('x2', '900')
-  line.setAttribute('y2', '16')
-  line.setAttribute('style', 'stroke:#fff; stroke-width:3')
+  line.setAttribute('y1', '0.1')
+  line.setAttribute('x2', '1')
+  line.setAttribute('y2', '0.1')
+  line.setAttribute('style', 'stroke:#fff; stroke-width:0.006')
   sign.appendChild(line)
-  
-  text = doc.createElement('text')
+
+  def CreateTextElem():
+    text = doc.createElement('text')
+    text.setAttribute('text-anchor', 'middle')
+    text.setAttribute('dy', '1em')
+    text.setAttribute('font-weight', '600')
+    text.setAttribute('font-family', 'Helvetica')
+    text.setAttribute('style', 'fill:#FFF')
+    return text
+
+  text = CreateTextElem()
   text.appendChild(doc.createTextNode('Merry Christmas'))
-  text.setAttribute('font-family', 'Helvetica')
-  text.setAttribute('font-size', '48')
-  text.setAttribute('font-weight', '600')
-  text.setAttribute('x', '24')
-  text.setAttribute('y', '78')
-  text.setAttribute('style', 'fill:#FFF')
+  text.setAttribute('x', '0.5')
+  text.setAttribute('y', '0.14')
+  text.setAttribute('font-size', '0.1')    
+  
   sign.appendChild(text)
   
-  text = doc.createElement('text')
+  text = CreateTextElem()
   text.appendChild(doc.createTextNode('And a Happy New Year'))
-  text.setAttribute('font-family', 'Helvetica')
-  text.setAttribute('font-size', '36')
-  text.setAttribute('font-weight', '600')
-  text.setAttribute('x', '24')
-  text.setAttribute('y', '134')
-  text.setAttribute('style', 'fill:#FFF')
-  
+  text.setAttribute('x', '0.5')
+  text.setAttribute('y', '0.29')
+  text.setAttribute('font-size', '0.07')      
   sign.appendChild(text)
 
   return sign
@@ -219,11 +222,11 @@ def main():
 
   sign = _CreateSign(doc)
 
-  sign.setAttribute('x', '175')
+  sign.setAttribute('x', '125')
   sign.setAttribute('y', '900')
-  sign.setAttribute('width', '450')
+  sign.setAttribute('width', '550')
   sign.setAttribute('height', '400')
-  sign.setAttribute('viewBox', '0 0 450 400')
+  sign.setAttribute('viewBox', '0 0 1 1')
   svg.appendChild(sign)
     
   xmlstr = doc.toprettyxml()
