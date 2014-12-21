@@ -79,6 +79,48 @@ def _CreateStar():
   polygon.setAttribute('style', 'fill:#ffd700')
   return polygon
 
+def _CreateSign(doc):
+  sign = doc.createElement('svg')
+
+  rect = doc.createElement('rect')
+  rect.setAttribute('x', '0')
+  rect.setAttribute('y', '0')
+  rect.setAttribute('width', '800')
+  rect.setAttribute('height', '200')
+  sign.appendChild(rect)
+
+  line = doc.createElement('line')
+  line.setAttribute('x1', '0')
+  line.setAttribute('y1', '20')
+  line.setAttribute('x2', '900')
+  line.setAttribute('y2', '20')
+  line.setAttribute('style', 'stroke:#fff; stroke-width:3')
+  sign.appendChild(line)
+
+  
+  text = doc.createElement('text')
+  text.appendChild(doc.createTextNode('Merry Christmas'))
+  text.setAttribute('font-family', 'Helvetica')
+  text.setAttribute('font-size', '58')
+  text.setAttribute('font-weight', '600')
+  text.setAttribute('x', '24')
+  text.setAttribute('y', '90')
+  text.setAttribute('style', 'fill:#FFF')
+  sign.appendChild(text)
+  
+  text = doc.createElement('text')
+  text.appendChild(doc.createTextNode('And a Happy New Year'))
+  text.setAttribute('font-family', 'Helvetica')
+  text.setAttribute('font-size', '38')
+  text.setAttribute('font-weight', '600')
+  text.setAttribute('x', '24')
+  text.setAttribute('y', '154')
+  text.setAttribute('style', 'fill:#FFF')
+  
+  sign.appendChild(text)
+
+  return sign
+
 def main():
 
   doc = minidom.Document()
@@ -173,12 +215,23 @@ def main():
   star_svg.setAttribute('x', '425')
   star_svg.setAttribute('y', '85')    
   svg.appendChild(star_svg)
-  
+
+  sign = _CreateSign(doc)
+
+  sign.setAttribute('x', '200')
+  sign.setAttribute('y', '1030')
+  sign.setAttribute('width', '600')
+  sign.setAttribute('height', '400')
+  sign.setAttribute('viewBox', '0 0 600 400')
+  svg.appendChild(sign)
+    
   xmlstr = doc.toprettyxml()
 
   # drop the first line, the <?xml ...> bit.
   for line in xmlstr.splitlines(True)[1:]:
     sys.stdout.write(line)
+
+  
 
 if __name__ == '__main__':
   main()
