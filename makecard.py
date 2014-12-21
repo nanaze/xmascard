@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import math
 import sys
 import svgwrite
 from xml.dom import minidom
@@ -14,6 +15,14 @@ def _LoadSvg(path):
 
   raise Exception('no svg found')
 
+def _GetPointsString(points):
+  point_strings = [] 
+  for point in points:
+    point_strings.append('%f, %f' % point)
+
+  points_string = ' '.join(point_strings)
+  return points_string
+  
 
 def _CreateTree():
   tree = minidom.Element('svg')
@@ -23,11 +32,7 @@ def _CreateTree():
   def AddPolygon(points, style=None):
     polygon = minidom.Element('polygon')
 
-    point_strings = [] 
-    for point in points:
-      point_strings.append('%f, %f' % point)
-
-    points_string = ' '.join(point_strings)
+    points_string = _GetPointsString(points)
     polygon.setAttribute('points', points_string)
 
     if style:
@@ -57,10 +62,22 @@ def _CreateTree():
   AddTriangle(0.1, 0.45, 0.45)
   AddTriangle(0.2, 0.66, 0.6)
   AddTriangle(0.3, 0.9, 0.78)
-
-  
   
   return tree
+
+def _CreateStar():
+  polygon = minidom.Element('polygon')
+
+  rot = 0
+  points = []
+  rot_step = ((2 * math.pi) / 10.0) * 4.0
+  for i in xrange(5):
+    point = (math.sin(rot), -math.cos(rot))
+    points.append(point)
+    rot += rot_step
+  polygon.setAttribute('points', _GetPointsString(points))
+  polygon.setAttribute('style', 'fill:#ffd700')
+  return polygon
 
 def main():
 
@@ -73,9 +90,9 @@ def main():
 
   # Build tree with triangles
   tree = _CreateTree()
-
+  
   x_offset = 100
-  y_offset = 100
+  y_offset = 200
   tree.setAttribute('width', str(800))
   tree.setAttribute('height', str(800))
   tree.setAttribute('x', str(x_offset))
@@ -147,13 +164,21 @@ def main():
   AddOrnament('6', (1, 0.25))
   AddOrnament('7', (0.33, 0.63))
   
+  star_svg = doc.createElement('svg')
+  star = _CreateStar()
+  star_svg.appendChild(star)
+  star_svg.setAttribute('viewBox', '-1 -1 2 2')
+  star_svg.setAttribute('width', '150')
+  star_svg.setAttribute('height', '150')
+  star_svg.setAttribute('x', '425')
+  star_svg.setAttribute('y', '85')    
+  svg.appendChild(star_svg)
   
   xmlstr = doc.toprettyxml()
 
   # drop the first line, the <?xml ...> bit.
   for line in xmlstr.splitlines(True)[1:]:
     sys.stdout.write(line)
-  
 
 if __name__ == '__main__':
   main()
