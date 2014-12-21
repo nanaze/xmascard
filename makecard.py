@@ -199,12 +199,12 @@ def main():
   AddOrnament('R', (0.35, 0.49))
   AddOrnament('S', (0.41, 0.22))
   AddOrnament('Z', (0.46, 0.79))
-  AddOrnament('1', (0.43, 0.1))
+  AddOrnament('1', (0.43, 0.08))
   AddOrnament('2', (0.26, 0.53))
   AddOrnament('3', (0.70, 0.78))
   AddOrnament('4', (0.55, 0.67))
   AddOrnament('5', (0.44, 0.43))
-  AddOrnament('6', (0.50, 0.17))  
+  AddOrnament('6', (0.50, 0.16))  
   AddOrnament('7', (0.33, 0.63))
   
   star_svg = doc.createElement('svg')
@@ -219,11 +219,11 @@ def main():
 
   sign = _CreateSign(doc)
 
-  sign.setAttribute('x', '200')
-  sign.setAttribute('y', '1030')
-  sign.setAttribute('width', '600')
+  sign.setAttribute('x', '175')
+  sign.setAttribute('y', '900')
+  sign.setAttribute('width', '450')
   sign.setAttribute('height', '400')
-  sign.setAttribute('viewBox', '0 0 600 400')
+  sign.setAttribute('viewBox', '0 0 450 400')
   svg.appendChild(sign)
     
   xmlstr = doc.toprettyxml()
